@@ -76,6 +76,8 @@ signals:
     void receiveDataSignal(const QByteArray &data);
     void networkDiscoveryCompleteSignal();
 
+private slots:
+    void OnTCPDisconnect();
 
 public slots:
     //void sendDataSlot(const QString &data);

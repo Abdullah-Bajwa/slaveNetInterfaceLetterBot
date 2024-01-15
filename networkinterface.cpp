@@ -1,4 +1,5 @@
 #include "networkinterface.h"
+#include "qtcpsocket.h"
 
 
 networkinterface::networkinterface(QObject *parent)
@@ -9,11 +10,12 @@ networkinterface::networkinterface(QObject *parent)
     qDebug() << udpSocket->bind(udpPortListen);
 
     connect(udpSocket, &QUdpSocket::readyRead, this, &networkinterface::receiveUdpPackage);
-
+    
 
     tcpSocket= new QTcpSocket(this);
 
     bool tcpSuccess = tcpSocket->bind(5465);
+    connect (tcpSocket,&QTcpSocket::disconnected,this,&networkinterface::OnTCPDisconnect);
     tcpSuccess ? 
         qDebug() << "TCP Bind Successful." 
         :
@@ -224,4 +226,9 @@ void networkinterface::Send_TCP()
     {
         qDebug() << "TCP Connection not established";
     }
+}
+
+void networkinterface::OnTCPDisconnect()
+{
+    qDebug() << "Disconnected";
 }
