@@ -21,7 +21,7 @@
 #include <QObject>
 
 #define MAKE16INT(v1,v2) (uint16_t)((((uint16_t)(v1))<<8)+(v2));
-#define PI_ID 5
+#define PI_ID 2
 
 typedef struct clientPi {
     uint16_t id = PI_ID;

@@ -155,7 +155,10 @@ void networkinterface:: packUDP(uint8_t mode ,const QHostAddress &senderAddress)
         {
             case ID_Request:
             {
-                transmitUdpData("\x01\x01", senderAddress, udpPortDest);
+                QByteArray data;
+                data.append(0x01);
+                data.append(CPi.id);
+                transmitUdpData(data, senderAddress, udpPortDest);
             }break;
 
             case Acknowledge:
